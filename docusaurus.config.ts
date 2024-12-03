@@ -13,7 +13,7 @@ const config: Config = {
   url: 'https://traffy.site',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/docs',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -30,6 +30,19 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en', 'ru'],
   },
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            from: '/docs', // Откуда редирект
+            to: '/docs/docs', // Куда редирект
+          },
+        ],
+      },
+    ],
+  ],
   presets: [
     [
       'classic',
@@ -51,12 +64,12 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/Traffy.png',
+    image: '/img/Traffy.png',
     navbar: {
       title: 'Traffy',
       logo: {
         alt: 'Traffy logo',
-        src: 'img/Traffy.png',
+        src: '/img/Traffy.png',
       },
       items: [
         {
