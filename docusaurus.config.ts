@@ -30,19 +30,6 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en', 'ru'],
   },
-  plugins: [
-    [
-      '@docusaurus/plugin-client-redirects',
-      {
-        redirects: [
-          {
-            from: '/', // Откуда редирект
-            to: '/docs', // Куда редирект
-          },
-        ],
-      },
-    ],
-  ],
   presets: [
     [
       'classic',

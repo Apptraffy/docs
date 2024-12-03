@@ -6,6 +6,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
+import { useEffect } from 'react';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -29,6 +30,9 @@ function HomepageHeader() {
 }
 
 export default function Home(): JSX.Element {
+  useEffect(() => {
+    window.location.href = "https://traffy.site/docs/docs"
+  }, [])
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
