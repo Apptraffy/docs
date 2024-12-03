@@ -1,0 +1,35 @@
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+# Шаг 3
+
+Создайте ```html``` елемент, в котором вы хотите чтобы отображались задания.
+
+Выберите элемент с помощью ref или querySelector
+
+```mdx-code-block
+<Tabs>
+<TabItem value="UseRef (React)">
+```
+
+```js
+const traffyTasks = useRef<HTMLDivElement | null>(null);
+<div ref={traffyTasks} className="yourClass" /> 
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Vanilla JS">
+```
+
+```js
+const element = document.querySelector("#uniqueId")
+<div id="uniqueId" class="yourClass" />
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
