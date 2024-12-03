@@ -36,8 +36,8 @@ const config: Config = {
       {
         redirects: [
           {
-            from: '/docs', // Откуда редирект
-            to: '/docs/docs', // Куда редирект
+            from: '/', // Откуда редирект
+            to: '/docs', // Куда редирект
           },
         ],
       },
