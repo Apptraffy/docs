@@ -1,0 +1,33 @@
+# Шаг 1. Установка скрипта.
+
+### 1.1. Получите скрипт вашей рекламной компании.
+
+Если Вы создатель Байера (рекламной компании), то отправьте скрипт своему разработчку из приложения Traffy.
+Вы можете скопировать скрипт из карточки рекламной компании.
+
+Пример того как выглядит скрипт рекламной компании:
+```html
+<script src="https://dvq1zz1g273yl.cloudfront.net/buyer_v1.0.1.min.js" traffy-key="Your Traffy Key" />
+```
+
+### 1.2. Разместите скрипт внутрь тега ```<head>``` вашей ```html``` страницы.
+
+Скопированный скрипт вставьте в ```<head>``` в ```html``` вашего Telegram Miniapp. После этого задания с подпиской на ваш Miniapp станут "с проверкой". Это увеличит эффективность заданий.
+
+Пример того как это может выглядеть:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://dvq1zz1g273yl.cloudfront.net/buyer_v1.0.1.min.js" traffy-key="Your Traffy Key" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
+```
