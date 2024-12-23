@@ -1,0 +1,71 @@
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+# Шаг 1. Подготовка
+
+### 1.1. Получите скрипт рекламной площадки.
+
+Если Вы создатель Селлера (рекламной площадки), то отправьте скрипт своему разработчку из приложения Traffy.
+Вы можете скопировать скрипт из карточки рекламной площадки.
+
+Пример того как выглядит скрипт:
+```html
+<script src="https://dvq1zz1g273yl.cloudfront.net/index_v1.1.0.min.js" traffy-key="Your Traffy Key" test="true"></script>
+```
+
+### 1.2. Разместите скрипт внутрь тега ```<head>``` вашей ```html``` страницы.
+
+Скопированный скрипт вставьте в конец ```<head>``` в ```html``` вашего Telegram Miniapp. После этого у вас появится возможность получать и рендерить задания Traffy.
+
+#### Важно! Скрипт должен находится после скрипта телеграмма и до скрипта миниапп.
+
+Пример того как это может выглядеть:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://dvq1zz1g273yl.cloudfront.net/index_v1.1.0.min.js" traffy-key="Traffy Key" test="true"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
+```
+
+### 1.3. Создайте контейнер.
+
+Создайте ```html``` елемент, в котором вы хотите чтобы отображались задания.
+
+Выберите элемент с помощью ref или querySelector
+
+```mdx-code-block
+<Tabs>
+<TabItem value="UseRef (React)">
+```
+
+```js
+const traffyTasks = useRef<HTMLDivElement | null>(null);
+<div ref={traffyTasks} className="yourClass" /> 
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Vanilla JS">
+```
+
+```js
+const element = document.querySelector("#uniqueId")
+<div id="uniqueId" class="yourClass" />
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
