@@ -65,6 +65,10 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+        },
       ],
     },
     footer: {
