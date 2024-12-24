@@ -51,12 +51,12 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: '/img/Traffy.png',
+    image: 'https://d36t0rmxsg07e0.cloudfront.net/Traffy.webp',
     navbar: {
       title: 'Traffy',
       logo: {
         alt: 'Traffy logo',
-        src: '/img/Traffy.png',
+        src: 'https://d36t0rmxsg07e0.cloudfront.net/Traffy.webp',
       },
       items: [
         {
