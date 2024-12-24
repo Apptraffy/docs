@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "1.0.x",
+    "description": "The label for version 1.0.x"
+  },
+  "sidebar.tutorialSidebar.category.Интеграция скрипта продавца": {
+    "message": "Интеграция скрипта продавца",
+    "description": "The label for category Интеграция скрипта продавца in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Интеграция скрипта рекламодателя": {
+    "message": "Интеграция скрипта рекламодателя",
+    "description": "The label for category Интеграция скрипта рекламодателя in sidebar tutorialSidebar"
+  }
+}

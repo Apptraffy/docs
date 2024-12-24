@@ -1,0 +1,37 @@
+---
+sidebar_label: Step 1. Styling and Testing
+---
+
+# Step 1. Script Installation.
+
+### 1.1. Obtain the script for your advertising campaign.
+
+If you are the creator of the Buyer (advertising campaign), send the script to your developer via the Traffy application.
+You can copy the script from the advertising campaign card.
+
+Example of how the advertising campaign script looks:
+```html
+<script src="https://dvq1zz1g273yl.cloudfront.net/buyer_v1.0.3.min.js" traffy-key="Your Traffy Key" />
+```
+
+### 1.2. Place the script inside the ```<head>``` tag of your ```html``` page.
+
+Paste the copied script inside the ```<head>``` of your ```html``` in the Telegram Miniapp. After this, tasks with subscription to your Miniapp will become "verified". This will increase the task effectiveness.
+
+Example of how it might look:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://dvq1zz1g273yl.cloudfront.net/buyer_v1.0.3.min.js" traffy-key="Your Traffy Key" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
+```

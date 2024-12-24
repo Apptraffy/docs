@@ -27,7 +27,7 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: 'ru',
     locales: ['en', 'ru'],
   },
   presets: [
@@ -69,6 +69,10 @@ const config: Config = {
           type: 'docsVersionDropdown',
           position: 'right',
         },
+        {
+          type: 'localeDropdown',
+          position: 'right'
+        }
       ],
     },
     footer: {
