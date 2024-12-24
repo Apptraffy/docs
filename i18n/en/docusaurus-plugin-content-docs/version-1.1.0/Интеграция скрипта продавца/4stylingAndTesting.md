@@ -1,4 +1,5 @@
 ---
+slug: /seller/styling-testing
 sidebar_label: Step 4. Styling and Testing
 ---
 

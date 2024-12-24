@@ -1,3 +1,7 @@
+---
+slug: /seller/functions-render
+sidebar_label: Шаг 2. Функции и рендер
+---
 
 # Шаг 2. Функции и рендер
 

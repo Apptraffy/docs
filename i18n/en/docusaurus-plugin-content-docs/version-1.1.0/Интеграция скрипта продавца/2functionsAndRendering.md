@@ -1,4 +1,5 @@
 ---
+slug: /seller/functions-render
 sidebar_label: Step 2. Functions and Rendering.
 ---
 

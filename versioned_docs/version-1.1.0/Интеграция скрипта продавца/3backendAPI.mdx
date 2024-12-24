@@ -1,5 +1,6 @@
 ---
-sidebar_label: Step 3. API for Backend
+slug: /seller/backendAPI
+sidebar_label: Шаг 3. Апи для бэкенда
 ---
 
 ```mdx-code-block
@@ -7,22 +8,23 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-# Step 3. API for Backend
+# Шаг 3. Апи для бэкенда
 
-The backend can verify the task completion via the following endpoint:
+Бэкенд может верифицировать выполнение задания по следующему пути:
 
 ```js
 Method: GET 
 Url: https://phlqqdhq2l.execute-api.eu-central-1.amazonaws.com/prod/is_reward_valid
 
-// Seller key. Traffy key
+Headers:
+//Ключ селлера. Traffy key
 SELLER_AUTH 
-// Task ID. task.company_id (from onTaskReward)
+//Айди таска. task.company_id (из onTaskReward)
 CAMPAIGN_ID 
-// User ID. chat_id telegram
+//Айди юзера. chat_id telegram
 USER_ID
-// Token provided upon reward (signedToken from onTaskReward)
-REWARD_TOKEN
+//Токен который дали при награде (signedToken из onTaskReward)
+REWARD_TOKEN 
 
 Response Body (json):
 result: boolean
