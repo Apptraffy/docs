@@ -1,0 +1,72 @@
+---
+id: get-is-subscribed
+title: "Check subscription"
+description: "Check subscription"
+sidebar_label: "Check subscription"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVdtu2kAQ/RVrn7nEUpIK3lATtVHzUDXkCaFovB7sxZdddscEgvj3ztpuwIFEaXjay8ycPXPmmJ0gSJwYz+Y9YdEZXTrk7U7EuIAqp2bppFWGlC7FWNy0Fz0hdUlY1iFgTK4k+JDh0vm4nXAyxQL8irYGOVNHS5Q+0Vht0JJqkHR2FBNpnSOUHLTpO9JcNUlrBBXzbaqeR9dXoR1dFheXYr/vCbRW26N8R1aVyTvp+fV6XcowdauXSNfpTLkl+Sn8JIHR9mVpsyyBkAs0v57wdGryd3UUUl+5J1dFvm8Rxu9UWyobZhBdrpcXyYXgMgYsFEhovSBnGtiS40jllUgRYrRcvOQs3j/c3t/f/nmaPE5/8mFXtamFxWIbZLjl9P8v/fjAhe9uTspWDm1AmGPCLw9kChQwta8gTCcPv84hqDjQi4DAZQFpRkCZif38bdR3fx60HW8OeTY2PJ6O1007PfdxR4ieWENe4XuCeBiWI9WtqH5ygVLeDN/Ky21Y/5OtsrnnR2TceDjUK1DL4joJ5QA3KCvCPhg1wKov2TsW8n44gAJedAnPbiB1MWR3xCdt+M2Hlaw3vrtdDDRxlnxbUXTVwahcH8HR5wCm6KjWZ+4FWuhaOUU5HoYn0hRwXd825tqkhYNmcrWjAmrbt3qeVaQD+ToZxEINTQ7Kc2uo7dpOz0S30/y4lKH8xW4XgcNHm+/3/nhVod0237E1WAWRf/lszgXbSfPSxMr5C9ZzAbnDkwe9ftGO/dI7/85mnLqea8dJ1Bp9Huy8iz7EPRjyi5jnfPUh4sGgHcTmciIlmiNDnf4hdMz043bK9voLMbY0TA==
+sidebar_class_name: "get api-method"
+info_path: docs/version-1.1.0/Интеграция продавца-бота/traffy-bot-api
+custom_edit_url: null
+slug: /seller/bot-api/is-subscribed
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Check subscription"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/is_subscribed"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Check subscription
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"header","name":"SELLER_AUTH","description":"Traffy key"},{"schema":{"type":"string"},"in":"header","name":"USER_ID","description":"user telegram chat id"},{"schema":{"type":"string"},"in":"header","name":"TASK_ID","description":"id of task to check"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"default":{"description":"Default","content":{"application/json":{"schema":{"type":"object","properties":{"ok":{"type":"boolean","x-stoplight":{"id":"hiw9651r94m04"}},"error":{"type":"string","x-stoplight":{"id":"l6vvnc1hsqzbo"}},"result":{"type":"boolean","x-stoplight":{"id":"gga9yzjrkkga1"}}}}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

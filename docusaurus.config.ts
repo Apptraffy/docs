@@ -1,7 +1,7 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-
+import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
@@ -39,7 +39,8 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links
-
+          docRootComponent: "@theme/DocRoot", // add @theme/DocRoot
+          docItemComponent: "@theme/ApiItem", // add @theme/ApiItem here
         },
         blog: false,
         theme: {
@@ -47,6 +48,24 @@ const config: Config = {
         },
       } satisfies Preset.Options,
     ],
+  ],
+  plugins: [
+    [
+      'docusaurus-plugin-openapi-docs',
+      {
+        id: "api", // plugin id
+        docsPluginId: "classic", // configured for preset-classic
+        config: {
+          botapi: {
+            specPath: "api/botapi.yaml",
+            outputDir: "versioned_docs/version-1.1.0/Интеграция продавца-бота",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+          } satisfies OpenApiPlugin.Options,
+        },
+      },
+    ]
   ],
 
   themeConfig: {
@@ -85,6 +104,7 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+  themes: ["docusaurus-theme-openapi-docs"]
 };
 
 export default config;

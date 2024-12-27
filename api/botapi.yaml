@@ -1,0 +1,117 @@
+openapi: 3.1.0
+x-stoplight:
+  id: zmk1dkory2e9c
+info:
+  title: Traffy bot api
+  version: '1.0'
+servers:
+  - url: 'https://oqaijm6g1c.execute-api.eu-central-1.amazonaws.com/prod'
+    description: "Production"
+  - url: 'https://epdkg7qtb5.execute-api.us-east-1.amazonaws.com/prod'
+    description: "Testing"
+paths:
+  /pick_tasks:
+    get:
+      summary: Get tasks
+      tags: []
+      responses:
+        default:
+          description: Default
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    x-stoplight:
+                      id: asrozaz53e9ob
+                  error:
+                    x-stoplight:
+                      id: cgdvrpbsg9snz
+                    type: string
+                  tasks:
+                    x-stoplight:
+                      id: z12kdoneo89zh
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                      x-stoplight:
+                        id: swl7oxczttl2t
+      operationId: get-pick_tasks
+      x-stoplight:
+        id: cs2mqsym0g0t2
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: SELLER_AUTH
+          description: Traffy key
+        - schema:
+            type: string
+          in: header
+          name: USER_ID
+          description: user's chat id
+  /is_subscribed:
+    get:
+      summary: Check subscription
+      tags: []
+      responses:
+        default:
+          description: Default
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    x-stoplight:
+                      id: hiw9651r94m04
+                  error:
+                    type: string
+                    x-stoplight:
+                      id: l6vvnc1hsqzbo
+                  result:
+                    type: boolean
+                    x-stoplight:
+                      id: gga9yzjrkkga1
+      operationId: get-is_subscribed
+      x-stoplight:
+        id: jir1kab4vj0g0
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: SELLER_AUTH
+          description: Traffy key
+        - schema:
+            type: string
+          in: header
+          name: USER_ID
+          description: user telegram chat id
+        - schema:
+            type: string
+          in: header
+          name: TASK_ID
+          description: id of task to check
+components:
+  schemas:
+    Task:
+      title: Task
+      x-stoplight:
+        id: jt58nw7h10xr2
+      type: object
+      properties:
+        id:
+          type: integer
+          x-stoplight:
+            id: 4kd820836nf39
+        link:
+          type: string
+          x-stoplight:
+            id: zmuxbtkr2tz9d
+        title:
+          type: string
+          x-stoplight:
+            id: iel0riidteq21

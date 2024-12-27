@@ -1,0 +1,72 @@
+---
+id: get-pick-tasks
+title: "Get tasks"
+description: "Get tasks"
+sidebar_label: "Get tasks"
+hide_title: true
+hide_table_of_contents: true
+api: eJyVVU1P4zAQ/SuVL3vpNwtLe0MCsUgcVks5oQpNnGli8mHXnkCbqv99x0koDW132Z5ie958vPfsbgRB5MT0ad4VFp3RuUNebkSICyhSqj+dtMqQ0rmYiuvmoCukzgnzKgSMSZUEHzJ4cT5uI5yMMQP/RWuDjNTBC0oPNFYbtKTqSjrZiwm0ThFyDlr1HGnOGsVVBRXyKTirSyjPz3CiA7HddgVaq60/PxYuo/DVmsBFE5eXgqObIo6syqNqA1ziTsHL0TgJdY76clLGe3CwFtbcoSLMToLdW/pDr2RJlI6pAitKPXrGJUX3H5z4FDtOFNMcoT3ByfckvBwPL88u8sXZpOIkVfk+pc20x9FlVqwCSuyYyklYoZs+vwZXmA6tUiHhcjxi+O7XFX6cyhB3PjBC6hklk+ea8ePZpBtnS7fOhtGQxp4zAxYyJLTeoUcc9SGk8taMEcKKp5xRvH64ub+/+f189Tj7yZttG88sLBbrToJrhv9/6scHTnx3fZC2cGi/uY6MgTo803b+OeAWqfPOAa74/jjer8fzvUxbxHTFK6QFniLIZ2d6Yt0w7G0EFPNi0OKae3p957CwqR+HyLjpYKCXoF6yi2gk+7hCWRD2wKg+Fj3JN9tC2hv1IYNS5/Dm+lJnA/ZpeDD1L94sZLXwZLZroAmT6MeSgvNWjcL1EBx9rcAMHVVyzL0eC10J9X6haiUDTR3O6znjWWvYqD+sbKQdZVA9So18+yq0Ku30JxZnYFJQfqR6ok3D7pPYY5cbijm9391sAnD4aNPt1m8vC7Tr+mV9Basg8N0+zTlbYyYvR6icP2ABF5A6POhm98buG7Z7vMnaP23TN/4RlS5fL/bJxn8t+HEVWsXqwysp0ewZ+fCfomXi25sZ2/oPGKs8fQ==
+sidebar_class_name: "get api-method"
+info_path: docs/version-1.1.0/Интеграция продавца-бота/traffy-bot-api
+custom_edit_url: null
+slug: /seller/bot-api/get-tasks
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get tasks"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/pick_tasks"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get tasks
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"schema":{"type":"string"},"in":"header","name":"SELLER_AUTH","description":"Traffy key"},{"schema":{"type":"string"},"in":"header","name":"USER_ID","description":"user's chat id"}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"default":{"description":"Default","content":{"application/json":{"schema":{"type":"object","properties":{"ok":{"type":"boolean","x-stoplight":{"id":"asrozaz53e9ob"}},"error":{"x-stoplight":{"id":"cgdvrpbsg9snz"},"type":"string"},"tasks":{"x-stoplight":{"id":"z12kdoneo89zh"},"type":"array","items":{"x-stoplight":{"id":"swl7oxczttl2t"},"title":"Task","type":"object","properties":{"id":{"type":"integer","x-stoplight":{"id":"4kd820836nf39"}},"link":{"type":"string","x-stoplight":{"id":"zmuxbtkr2tz9d"}},"title":{"type":"string","x-stoplight":{"id":"iel0riidteq21"}}}}}}}}}}}}
+>
+  
+</StatusCodes>
+
+
+      
