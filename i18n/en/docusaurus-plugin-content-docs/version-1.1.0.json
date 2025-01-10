@@ -3,12 +3,16 @@
     "message": "1.1.0",
     "description": "The label for version 1.1.0"
   },
-  "sidebar.tutorialSidebar.category.Интеграция скрипта продавца": {
-    "message": "Integration of a seller script",
+  "sidebar.tutorialSidebar.category.Интеграция скрипта в mini app продавца рекламы": {
+    "message": "Integration of a script into an advertising seller’s mini-application",
     "description": "The label for category Интеграция скрипта продавца in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Интеграция скрипта рекламодателя": {
     "message": "Integration of an advertiser script",
+    "description": "The label for category Интеграция скрипта рекламодателя in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Апи для интеграции в бота продавца рекламы": {
+    "message": "API for integrating an ad seller into a bot",
     "description": "The label for category Интеграция скрипта рекламодателя in sidebar tutorialSidebar"
   }
 }
