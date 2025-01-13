@@ -1,0 +1,50 @@
+---
+id: traffy-bot-api
+title: "Traffy bot api"
+description: ""
+sidebar_label: Introduction
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+slug: /seller/bot-api/
+---
+
+import ApiLogo from "@theme/ApiLogo";
+import Heading from "@theme/Heading";
+import SchemaTabs from "@theme/SchemaTabs";
+import TabItem from "@theme/TabItem";
+import Export from "@theme/ApiExplorer/Export";
+
+<span
+  className={"theme-doc-version-badge badge badge--secondary"}
+  children={"Version: 1.0"}
+>
+</span>
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Traffy bot api"}
+>
+Integration of Traffy tasks into the bot
+</Heading>
+
+If you are the owner or developer of a bot and want to add Traffy tasks to the bot (for example, as a mandatory subscription), you can use the Traffy API.
+
+#### Traffy API состоит из двух эндпоинтов:
+
+- Endpoint that allows you to get tasks.
+- Endpoint that allows you to check if a user has subscribed to a specific channel/mini app/bot.
+
+#### Features of the API:
+
+- When requesting tasks from Traffy, the tasks are different each time. They are not cached by the service. You can set up caching on the bot’s side.
+
+- If a task has become irrelevant (e.g., the task is completed, paused, or deleted), but due to the cache on your bot’s side, the user receives this task, they will still be able to attempt it. However, the money for their transition will not be credited.
+
+
+
+
+
+
+      
