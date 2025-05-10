@@ -1,38 +1,36 @@
 ---
-slug: /seller/styling-testing
-sidebar_label: Шаг 2. Стилизация и тестирование
+slug: /seller/styling
+sidebar_label: Шаг 3. Стилизация
 ---
 
-# Шаг 2. Стилизация и тестирование
-
-<ul>
-<li>
-    Вы можете стилизовать задания под вашу площаку, используя css-переменные. Добавьте css файл, в котором опишите класс ```.traffy-custom.```
-    Пример (например в customizeTasks.css):
-```css
-.traffy-custom {
-    --traffy-taskElementCont-bg: #F7C5FF;
-}
+```mdx-code-block
+import CodeBlock from '@theme/CodeBlock';
 ```
-</li>
-<li>
-    Текст наград и заданий вы можете менять с помощью функции (см. конкретные примеры ниже)
-    ```js
-    function onTaskRender(changeReward, changeCardTitle, changeDescription, changeButtonCheckText){
+
+# Шаг 3. Стилизация
+
+```mdx-code-block
+<CodeBlock className="language-css" title="Вы можете стилизовать задания под вашу площаку, используя css-переменные. Добавьте css файл, в котором опишите класс .traffy-custom. (Например, в customizeTasks.css):">
+{`
+    .traffy-custom {
+        --traffy-taskElementCont-bg: #F7C5FF;
     }
-    ```
-</li>
-
-<li>
-Для того, чтобы получить тестовые задания, используйте наш скрипт в виде (test="true"):
+`}
+</CodeBlock>
 ```
-<script src="https://dvq1zz1g273yl.cloudfront.net/index_v1.1.0.min.js" traffy-key="Traffy Key" test="true"></script>
+
+```mdx-code-block
+<CodeBlock className="language-js" title="Текст наград и заданий вы можете менять с помощью этой функции:">
+{`
+    // Это одна из функций, которая передается в window.Traffy.renderTasks
+    function onTaskRender(changeReward, changeCardTitle, changeDescription, changeButtonCheckText) {
+        // конкретные реализации см. ниже
+    }
+`}
+</CodeBlock>
 ```
-</li>
 
-</ul>
-
-## Примеры того, как может выглядеть задание:
+## Примеры стилизованных заданий:
 
 ### Классический вариант без фото:
 

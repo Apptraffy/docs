@@ -4,8 +4,6 @@ sidebar_label: Шаг 1. Установка скрипта
 ---
 
 ```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import {SCRIPT_SRC} from "../../src/constants/version";
 ```
@@ -20,9 +18,14 @@ import {SCRIPT_SRC} from "../../src/constants/version";
 
 ```mdx-code-block
 <CodeBlock className="language-html" title="Скрипт Traffy:">
-{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="production"></script>`}
+{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="test"></script>`}
 </CodeBlock>
 ```
+
+>Скрипт поддерживает два режима работы, начните с тестового скрипта:
+
+- **test**: используется для локальной отладки вне Telegram, со встроенными заданиями (типов: Bing – всегда успешные, DuckDuckGo – всегда неуспешные).
+- **production**: используется в реальном режиме внутри Telegram, где задания подбираются автоматически и исчезают после выполнения.
 
 ### 1.2. Разместите скрипт внутрь тега ```<head>``` вашей ```html``` страницы.
 
@@ -38,7 +41,7 @@ import {SCRIPT_SRC} from "../../src/constants/version";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="production"></script>
+    <script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="test"></script>
   </head>
   <body>
     <div id="root"></div>
@@ -46,48 +49,4 @@ import {SCRIPT_SRC} from "../../src/constants/version";
   </body>
 </html>`}
 </CodeBlock>
-```
-
-### Краткая справка по `window.Traffy.renderTasks`
-
-Функция `window.Traffy.renderTasks` отображает задания Traffy в указанном HTML-контейнере. Она принимает:
-- HTML-элемент (контейнер для заданий)
-- Объект с колбэками (для обработки успешной или неудачной проверки задания)
-
-После вызова:
-- Задания загружаются с сервера с показом loader'а.
-- Пользователь взаимодействует с заданиями.
-- По результату действия запускается соответствующий колбэк.
-
-Эта справка дает общее представление, чтобы вы могли перейти к следующему шагу настройки.
-
-### 1.4. Создайте контейнер.
-
-Создайте ```html``` елемент, в котором вы хотите чтобы отображались задания.
-
-Выберите элемент с помощью ref или querySelector
-
-```mdx-code-block
-<Tabs>
-<TabItem value="UseRef (React)">
-```
-
-```js
-const traffyTasks = useRef<HTMLDivElement | null>(null);
-<div ref={traffyTasks} className="yourClass" /> 
-```
-
-```mdx-code-block
-</TabItem>
-<TabItem value="Vanilla JS">
-```
-
-```js
-const element = document.querySelector("#uniqueId")
-<div id="uniqueId" class="yourClass" />
-```
-
-```mdx-code-block
-</TabItem>
-</Tabs>
 ```

@@ -3,16 +3,12 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.Интеграция скрипта в mini app продавца рекламы": {
-    "message": "Integration of a script into an advertising seller’s mini-application",
+  "sidebar.tutorialSidebar.category.Покупка трафика на Telegram Miniapp": {
+    "message": "Purchasing Traffic on Telegram Miniapp",
     "description": "The label for category Интеграция скрипта продавца in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.Покупка трафика: на Telegram Miniapp": {
-    "message": "Traffic Purchase: to Telegram Miniapp",
-    "description": "The label for category Интеграция скрипта рекламодателя in sidebar tutorialSidebar"
-  },
-  "sidebar.tutorialSidebar.category.Апи для интеграции в бота продавца рекламы": {
-    "message": "API for integrating an ad seller into a bot",
+  "sidebar.tutorialSidebar.category.Продажа трафика c Telegram Miniapp": {
+    "message": "Selling Traffic from Telegram Miniapp\n",
     "description": "The label for category Интеграция скрипта рекламодателя in sidebar tutorialSidebar"
   }
 }

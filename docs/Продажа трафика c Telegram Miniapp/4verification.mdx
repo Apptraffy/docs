@@ -1,0 +1,100 @@
+---
+slug: /seller/backendAPI
+sidebar_label: Шаг 4. Верификация награды
+---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import {SCRIPT_SRC} from "../../src/constants/version";
+```
+
+# Шаг 4. Верификация награды
+
+### 4.1. Подготовка.
+
+- Если вы дошли до этого этапа, то можете перейти с локальной разработки на разработку в telegram и **переключить скрипт на production** режим:
+```mdx-code-block
+<CodeBlock className="language-html" title="Скрипт Traffy:">
+{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="production"></script>`}
+</CodeBlock>
+```
+
+- Когда задание считается выполненным - срабатывает функция:
+
+```mdx-code-block
+<CodeBlock className="language-js" title="Функция вызывается, если задание прошло проверку (это одна из функций, которая передается в window.Traffy.renderTasks):">
+{`
+    function onTaskReward(task: Task, signedToken: string) {
+        // Пример отправки запроса на сервер для верификации задания
+        // (Имеет смысл только в production режиме)
+        // const url = new URL('Your Endpoint');
+        // url.searchParams.set("auth", "Your Auth");
+
+        // fetch(url.toString(), {
+        //     method: "POST",
+        //     body: JSON.stringify({
+        //         hash: signedToken
+        //     }
+        // }).then((res: Response) => {
+        //     if (res.status === 200) {
+        //         // Пример обновления баланса наград. Напишите свою функцию
+        //         setBalance(state.traffy_reward, "add");
+        //     }
+        // }).catch(() => {
+        //     // Обработка ошибок (например, вывод сообщения об ошибке)
+        // });
+    }
+`}
+</CodeBlock>
+```
+
+- Эта функция получает signedToken как параметр. Этот токен позволяет вам верифицировать
+выполнение задания на бэкенде и начислить награду пользователю в вашей валюте в вашем приложении.
+
+### 4.2. Как безопасно наградить пользователя за выполнение задания Traffy?
+
+1. В функции onTaskReward отправьте запрос на ваш бэкенд, передав в нем параметр **signedToken**.
+2. На бэкенде примите запрос и извлеките **signedToken**.
+3. С вашего бэкенда выполните запрос к указанному **endpoint** с использованием полученного **signedToken**.
+4. Получите ответ от **endpoint** и проверьте, валиден ли токен.
+5. Если токен валидный, проверьте, не был ли **ранее использован** этот токен для начисления награды.
+6. Если награда по данному токену ещё не была выдана, начислите её пользователю и верните фронтенду ответ о том, **что награда выдана**.
+7. Если токен невалидный или награда уже была начислена, верните фронтенду ответ о том, что награда **не будет выдана**.
+8. Фронтенд **поменяет баланс** пользователю, если нужно.
+
+### 4.3. Апи для бэкенда.
+
+```mdx-code-block
+<CodeBlock className="language-ts" title="Запрос на верификацию на typescript:">
+{`
+    import axios from 'axios';
+
+    export type VerificationResponse =
+    | {
+        success: true;
+        data: {
+            telegram_id: number;
+            task_id: string;
+            resource_id: string;
+        };
+    }
+    | {
+        success: false;
+        data: null;
+    };
+
+    export async function getVerifyTraffyToken(
+        signedToken: string
+    ): Promise<VerificationResponse> {
+
+        const url = new URL('https://api.traffy.site/v1/mixer/app/verify_token');
+        url.searchParams.append('token', signedToken);
+
+        const response = await axios.get(url.toString());
+        return response.data as VerificationResponse;
+    }
+`}
+</CodeBlock>
+```
