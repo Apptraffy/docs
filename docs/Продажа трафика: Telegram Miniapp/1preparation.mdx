@@ -1,0 +1,93 @@
+---
+slug: /seller/preparation
+sidebar_label: Шаг 1. Установка скрипта
+---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import {SCRIPT_SRC} from "../../src/constants/version";
+```
+
+# Шаг 1. Установка скрипта.
+
+### 1.1. Получите Traffy Key вашего ресурса и скопируйте указанный скрипт.
+
+Если вы создатель ресурса, отправьте вашему разработчику **Traffy Key** из приложения **Traffy**. Чтобы его найти, откройте **карточку вашего ресурса** на главной странице продавца и нажмите на плашку, отвечающую за скрипт, чтобы скопировать ключ.
+
+После этого замените значение **resource-id** на полученный **Traffy Key**.
+
+```mdx-code-block
+<CodeBlock className="language-html" title="Скрипт Traffy:">
+{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="production"></script>`}
+</CodeBlock>
+```
+
+### 1.2. Разместите скрипт внутрь тега ```<head>``` вашей ```html``` страницы.
+
+Вставьте скрипт из шага 1.1 в `<head>` вашего HTML-файла для Telegram Miniapp. После этого вам станут доступны **функции Traffy** (`window.Traffy.renderTasks`), необходимые для дальнейшей работы.
+
+**Внимание! Скрипт должен быть размещен после скрипта Telegram (https://telegram.org/js/telegram-web-app.js)**
+
+```mdx-code-block
+<CodeBlock className="language-html" title="Пример:">
+{`<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="production"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>`}
+</CodeBlock>
+```
+
+### Краткая справка по `window.Traffy.renderTasks`
+
+Функция `window.Traffy.renderTasks` отображает задания Traffy в указанном HTML-контейнере. Она принимает:
+- HTML-элемент (контейнер для заданий)
+- Объект с колбэками (для обработки успешной или неудачной проверки задания)
+
+После вызова:
+- Задания загружаются с сервера с показом loader'а.
+- Пользователь взаимодействует с заданиями.
+- По результату действия запускается соответствующий колбэк.
+
+Эта справка дает общее представление, чтобы вы могли перейти к следующему шагу настройки.
+
+### 1.4. Создайте контейнер.
+
+Создайте ```html``` елемент, в котором вы хотите чтобы отображались задания.
+
+Выберите элемент с помощью ref или querySelector
+
+```mdx-code-block
+<Tabs>
+<TabItem value="UseRef (React)">
+```
+
+```js
+const traffyTasks = useRef<HTMLDivElement | null>(null);
+<div ref={traffyTasks} className="yourClass" /> 
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Vanilla JS">
+```
+
+```js
+const element = document.querySelector("#uniqueId")
+<div id="uniqueId" class="yourClass" />
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```

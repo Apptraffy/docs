@@ -1,0 +1,1 @@
+export const SCRIPT_SRC = 'https://embed.traffy.site/v0.0.7/traffy-wrapper.min.js';
