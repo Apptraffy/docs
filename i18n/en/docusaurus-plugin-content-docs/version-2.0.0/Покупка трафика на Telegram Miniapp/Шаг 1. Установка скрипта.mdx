@@ -1,0 +1,47 @@
+---
+slug: /buyer/script-installation
+sidebar_label: Step 1. Script Installation
+---
+
+```mdx-code-block
+import CodeBlock from '@theme/CodeBlock';
+import {SCRIPT_SRC} from "../../../../../src/constants/version";
+```
+
+# Step 1. Script Installation.
+
+### 1.1. Obtain Your Campaign Traffy Key and Copy the Script Below.
+
+If you are the creator of an advertising campaign, provide your developer with the **Traffy Key** from the **Traffy** application. You can find it by selecting the campaign card on the buyer's main page and navigating to the **Script Section**.
+
+Then, copy the script and replace the **resource-id** value with your **Traffy Key**:
+
+```mdx-code-block
+<CodeBlock className="language-html" title="Traffy Script:">
+{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="production"></script>`}
+</CodeBlock>
+```
+
+### 1.2. Embed the Script in the ```<head>``` Section of Your HTML Page.
+
+Insert the copied script (from step 1.1) into the `<head>` section of your Telegram Miniapp's HTML page. After that, subscription tasks will be set as "verified," increasing their effectiveness, and the script status will be updated on the campaign card.
+
+**Attention! The script must be placed after the Telegram script (https://telegram.org/js/telegram-web-app.js)**
+
+```mdx-code-block
+<CodeBlock className="language-html" title="Example (index.html):">
+{`<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="production"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>`}
+</CodeBlock>
+```

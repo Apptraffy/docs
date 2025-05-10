@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "2.0.0",
+    "description": "The label for version 2.0.0"
+  },
+  "sidebar.tutorialSidebar.category.Покупка трафика на Telegram Miniapp": {
+    "message": "Purchasing Traffic on Telegram Miniapp",
+    "description": "The label for category Интеграция скрипта продавца in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Продажа трафика c Telegram Miniapp": {
+    "message": "Selling Traffic from Telegram Miniapp\n",
+    "description": "The label for category Интеграция скрипта рекламодателя in sidebar tutorialSidebar"
+  }
+}

@@ -1,0 +1,52 @@
+---
+slug: /seller/preparation
+sidebar_label: Step 1. Script Installation
+---
+
+```mdx-code-block
+import CodeBlock from '@theme/CodeBlock';
+import {SCRIPT_SRC} from "../../../../../src/constants/version";
+```
+
+# Step 1. Script Installation.
+
+### 1.1. Obtain Your Resource Traffy Key and Copy the Provided Script.
+
+If you are the resource creator, share your **Traffy Key** from the **Traffy** app with your developer. To locate it, open your **resource card** on the seller's main page and click on the script badge to copy the key.
+
+After that, replace the **resource-id** value with your obtained **Traffy Key**.
+
+```mdx-code-block
+<CodeBlock className="language-html" title="Traffy Script:">
+{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="test"></script>`}
+</CodeBlock>
+```
+
+> The script supports two modes of operation. Start with the test mode:
+
+- **test**: Used for local debugging outside Telegram, with built-in tasks (types: Bing – always successful, DuckDuckGo – always unsuccessful).
+- **production**: Used in real mode inside Telegram, where tasks are selected automatically and disappear after completion.
+
+### 1.2. Embed the Script into the ```<head>``` Section of Your HTML Page.
+
+Insert the script from step 1.1 into the `<head>` section of your HTML file for the Telegram Miniapp. Once added, the **Traffy functions** (`window.Traffy.renderTasks`) required for further operations will become available.
+
+**Attention! The script must be placed after the Telegram script (https://telegram.org/js/telegram-web-app.js).**
+
+```mdx-code-block
+<CodeBlock className="language-html" title="Example:">
+{`<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="test"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>`}
+</CodeBlock>
+```

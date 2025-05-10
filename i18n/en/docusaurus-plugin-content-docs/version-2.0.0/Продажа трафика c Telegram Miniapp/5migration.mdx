@@ -1,0 +1,21 @@
+---
+slug: /seller/migration
+sidebar_label: What Changed from the First Version?
+---
+
+# Migration to Version 2.
+
+### If you have already integrated the Traffy script previously:
+
+1. Create a new resource (a new seller) in the new Traffy application if you haven't done so already.
+2. Replace the old script with the new one (follow step 1).
+3. Note that in step 2, the Task type has changed. It now looks like this:
+```ts
+type Task = {
+    id: string; // previously company_id
+    title: string;
+    image_url: string | null; // previously photo_url
+    link: string;
+}
+```
+4. In step 4, the API for token verification on the backend has changed. Now, from the frontend you only need to send the token, and the request for token verification has also been modified.

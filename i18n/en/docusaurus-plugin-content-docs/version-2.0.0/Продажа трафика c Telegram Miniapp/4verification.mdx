@@ -1,0 +1,99 @@
+---
+slug: /seller/backendAPI
+sidebar_label: Step 4. Reward Verification
+---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import {SCRIPT_SRC} from "../../../../../src/constants/version";
+```
+
+# Step 4. Reward Verification
+
+### 4.1. Setup
+
+- If you have reached this stage, you can move from local development to Telegram development and **switch the script to production** mode:
+```mdx-code-block
+<CodeBlock className="language-html" title="Traffy Script:">
+{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="production"></script>`}
+</CodeBlock>
+```
+
+- When the task is considered completed, the following function is triggered:
+
+```mdx-code-block
+<CodeBlock className="language-js" title="This function is called if the task passes verification (this is one of the functions passed to window.Traffy.renderTasks):">
+{`
+    function onTaskReward(task: Task, signedToken: string) {
+        // Example of sending a request to the server to verify the task
+        // (Only applicable in production mode)
+        // const url = new URL('Your Endpoint');
+        // url.searchParams.set("auth", "Your Auth");
+
+        // fetch(url.toString(), {
+        //     method: "POST",
+        //     body: JSON.stringify({
+        //         hash: signedToken
+        //     }
+        // }).then((res: Response) => {
+        //     if (res.status === 200) {
+        //         // Example of updating the reward balance. Write your own function
+        //         setBalance(state.traffy_reward, "add");
+        //     }
+        // }).catch(() => {
+        //     // Error handling (for example, displaying an error message)
+        // });
+    }
+`}
+</CodeBlock>
+```
+
+- This function receives a `signedToken` as a parameter. This token allows you to verify task completion on the backend and credit the user with their reward in your application's currency.
+
+### 4.2. How to Safely Reward a User for Completing a Traffy Task?
+
+1. In the `onTaskReward` function, send a request to your backend, passing the **signedToken** parameter.
+2. On the backend, receive the request and extract the **signedToken**.
+3. From your backend, make a request to the specified **endpoint** using the received **signedToken**.
+4. Obtain the response from the **endpoint** and check if the token is valid.
+5. If the token is valid, verify that this token has not been **previously used** for rewarding.
+6. If the reward for this token has not yet been granted, credit the reward to the user and return a response to the frontend indicating that the **reward has been granted**.
+7. If the token is invalid or the reward has already been given, return a response to the frontend stating that the reward **will not be granted**.
+8. The frontend **will update the user's balance** if needed.
+
+### 4.3. API for the Backend
+
+```mdx-code-block
+<CodeBlock className="language-ts" title="Verification request in TypeScript:">
+{`
+    import axios from 'axios';
+
+    export type VerificationResponse =
+    | {
+        success: true;
+        data: {
+            telegram_id: number;
+            task_id: string;
+            resource_id: string;
+        };
+    }
+    | {
+        success: false;
+        data: null;
+    };
+
+    export async function getVerifyTraffyToken(
+        signedToken: string
+    ): Promise<VerificationResponse> {
+
+        const url = new URL('https://api.traffy.site/v1/mixer/app/verify_token');
+        url.searchParams.append('token', signedToken);
+
+        const response = await axios.get(url.toString());
+        return response.data as VerificationResponse;
+    }
+`}
+</CodeBlock>
+```
