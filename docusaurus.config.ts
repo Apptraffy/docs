@@ -30,6 +30,9 @@ const config: Config = {
     defaultLocale: 'ru',
     locales: ['en', 'ru'],
   },
+  future: {
+    experimental_router: 'hash',
+  },
   presets: [
     [
       'classic',
