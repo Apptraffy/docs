@@ -7,7 +7,7 @@ import "./index.module.css"
 
 export default function Home(): JSX.Element {
   useEffect(() => {
-    window.location.href = "https://docs.traffy.site/docs"
+    window.location.href = "https://docs.traffy.site"
   }, [])
   const {siteConfig} = useDocusaurusContext();
   return (
