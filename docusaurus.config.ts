@@ -30,6 +30,7 @@ const config: Config = {
     defaultLocale: 'ru',
     locales: ['en', 'ru'],
   },
+
   presets: [
     [
       'classic',
