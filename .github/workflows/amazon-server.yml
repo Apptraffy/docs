@@ -45,7 +45,9 @@ jobs:
             export PATH=$PATH:/home/ubuntu/.nvm/versions/node/v22.15.0/bin
             
             cd ~/traffy-docs/
-      
+
+            pm2 stop traffy-docs
+            
             npm ci
       
             pm2 restart traffy-docs || \
