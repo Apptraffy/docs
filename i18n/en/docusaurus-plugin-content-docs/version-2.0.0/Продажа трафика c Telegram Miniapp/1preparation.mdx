@@ -18,13 +18,13 @@ After that, replace the **resource-id** value with your obtained **Traffy Key**.
 
 ```mdx-code-block
 <CodeBlock className="language-html" title="Traffy Script:">
-{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="test"></script>`}
+{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="mock"></script>`}
 </CodeBlock>
 ```
 
 > The script supports two modes of operation. Start with the test mode:
 
-- **test**: Used for local debugging outside Telegram, with built-in tasks (types: Bing – always successful, DuckDuckGo – always unsuccessful).
+- **mock**: Used for local debugging outside Telegram, with built-in tasks (types: Bing – always successful, DuckDuckGo – always unsuccessful).
 - **production**: Used in real mode inside Telegram, where tasks are selected automatically and disappear after completion.
 
 ### 1.2. Embed the Script into the ```<head>``` Section of Your HTML Page.
@@ -41,7 +41,7 @@ Insert the script from step 1.1 into the `<head>` section of your HTML file for 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="test"></script>
+    <script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="mock"></script>
   </head>
   <body>
     <div id="root"></div>

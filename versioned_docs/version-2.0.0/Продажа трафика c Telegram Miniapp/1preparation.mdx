@@ -18,13 +18,13 @@ import {SCRIPT_SRC} from "../../../src/constants/version";
 
 ```mdx-code-block
 <CodeBlock className="language-html" title="Скрипт Traffy:">
-{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="test"></script>`}
+{`<script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="mock"></script>`}
 </CodeBlock>
 ```
 
 >Скрипт поддерживает два режима работы, начните с тестового скрипта:
 
-- **test**: используется для локальной отладки вне Telegram, со встроенными заданиями (типов: Bing – всегда успешные, DuckDuckGo – всегда неуспешные).
+- **mock**: используется для локальной отладки вне Telegram, со встроенными заданиями (типов: Bing – всегда успешные, DuckDuckGo – всегда неуспешные).
 - **production**: используется в реальном режиме внутри Telegram, где задания подбираются автоматически и исчезают после выполнения.
 
 ### 1.2. Разместите скрипт внутрь тега ```<head>``` вашей ```html``` страницы.
@@ -41,7 +41,7 @@ import {SCRIPT_SRC} from "../../../src/constants/version";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="test"></script>
+    <script src="${SCRIPT_SRC}" resource-id="Paste Your Traffy Key" mode="mock"></script>
   </head>
   <body>
     <div id="root"></div>
