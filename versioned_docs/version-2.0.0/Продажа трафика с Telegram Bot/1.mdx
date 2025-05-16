@@ -1,0 +1,217 @@
+---
+id: traffy-bot-api
+title: "Traffy bot api"
+description: ""
+sidebar_label: Как интегрировать задания?
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+slug: /seller-bot/api/
+---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+```
+
+# Интеграция Traffy-заданий в Telegram Bot
+
+Если вы владелец или разработчик бота, и хотите добавить задания Traffy в этого бота (например, в виде обязательной подписки),
+то вы можете воспользоваться Traffy API.
+
+> Внимание! Данный подход не работает для Telegram Miniapp.
+
+### Traffy API состоит из двух endpoint:
+
+```mdx-code-block
+<Tabs>
+<TabItem value="JS">
+```
+
+```mdx-code-block
+<CodeBlock className="language-ts" title="Endpoint, который позволяет получить задания (typescript):">
+{`
+    import axios from 'axios';
+
+    export type GetTraffyTasksResponse =
+    {
+        "success": true,
+        "message": "string",
+        "tasks": {
+            "id": "string",
+            "title": "string",
+            "link": "string",
+            "image_url": "string"
+        }[]
+    }
+
+    export async function getTraffyTasks(
+        resourceId: string,
+        telegramChatId: string
+    ): Promise<GetTraffyTasksResponse> {
+
+        const url = new URL('https://api.traffy.site/v1/mixer/bot/pick_tasks');
+
+        url.searchParams.append('resource_id', resourceId);
+        url.searchParams.append('telegram_id', telegramChatId);
+        url.searchParams.append('max_tasks', 3);
+
+        const response = await axios.get(url.toString());
+        return response.data as GetTraffyTasksResponse;
+    }
+`}
+</CodeBlock>
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Python">
+```
+
+```mdx-code-block
+<CodeBlock className="language-python" title="Endpoint, который позволяет получить задания (python):">
+{`
+import requests
+from typing import List, TypedDict
+
+class Task(TypedDict):
+    id: str
+    title: str
+    link: str
+    image_url: str
+
+class GetTraffyTasksResponse(TypedDict):
+    success: bool
+    message: str
+    tasks: List[Task]
+
+def get_traffy_tasks(resource_id: str, telegram_chat_id: str) -> GetTraffyTasksResponse:
+    url = "https://api.traffy.site/v1/mixer/bot/pick_tasks"
+    params = {
+        "resource_id": resource_id,
+        "telegram_id": telegram_chat_id,
+        "max_tasks": 3  # Значение будет автоматически преобразовано в строку
+    }
+
+    response = requests.get(url, params=params)
+    response.raise_for_status()  # выбрасываем исключение в случае HTTP ошибки
+    return response.json()  # предполагается, что возвращаемое значение соответствует GetTraffyTasksResponse
+
+# Пример использования:
+if __name__ == "__main__":
+    resource_id = "your_resource_id"
+    telegram_chat_id = "your_telegram_chat_id"  # передайте chat id как строку или число, будет преобразовано
+    result = get_traffy_tasks(resource_id, telegram_chat_id)
+    print(result)
+`}
+</CodeBlock>
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+```mdx-code-block
+<Tabs>
+<TabItem value="JS">
+```
+
+```mdx-code-block
+<CodeBlock className="language-ts" title="Endpoint, который позволяет проверить, подписался ли пользователь на конкретный канал/миниап/бота (typescript):">
+{`
+    import axios from 'axios';
+
+    export type CheckTraffyTaskResponse =
+    {
+        "is_completed": false,
+        "token": null
+    } | {
+        "is_completed": true,
+        "token": string
+    }
+
+    export async function checkSubscriptionTraffy(
+        resourceId: string,
+        telegramChatId: string,
+        taskId: string
+    ): Promise<CheckTraffyTaskResponse> {
+
+        const url = new URL('https://api.traffy.site/v1/mixer/bot/check_completion');
+
+        url.searchParams.append('resource_id', resourceId);
+        url.searchParams.append('telegram_id', telegramChatId);
+        url.searchParams.append('task_id', taskId);
+
+        const response = await axios.get(url.toString());
+        return response.data as CheckTraffyTaskResponse;
+    }
+`}
+</CodeBlock>
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Python">
+```
+
+```mdx-code-block
+<CodeBlock className="language-ts" title="Endpoint, который позволяет проверить, подписался ли пользователь на конкретный канал/миниап/бота (python):">
+{`
+import requests
+from typing import Union, TypedDict
+
+class CheckTraffyTaskNotCompleted(TypedDict):
+    is_completed: bool  # Будет False
+    token: None
+
+class CheckTraffyTaskCompleted(TypedDict):
+    is_completed: bool  # Будет True
+    token: str
+
+CheckTraffyTaskResponse = Union[CheckTraffyTaskNotCompleted, CheckTraffyTaskCompleted]
+
+def check_subscription_traffy(resource_id: str, telegram_chat_id: str, task_id: str) -> CheckTraffyTaskResponse:
+    url = "https://api.traffy.site/v1/mixer/bot/check_completion"
+    params = {
+        "resource_id": resource_id,
+        "telegram_id": telegram_chat_id,
+        "task_id": task_id,
+    }
+
+    response = requests.get(url, params=params)
+    response.raise_for_status()  # выброс ошибки при отсутствии успешного ответа
+    return response.json()  # предполагается, что возвращаемые данные соответствуют CheckTraffyTaskResponse
+
+# Пример использования:
+if __name__ == "__main__":
+    resource_id = "your_resource_id"
+    telegram_chat_id = "your_telegram_chat_id"
+    task_id = "your_task_id"
+
+    result = check_subscription_traffy(resource_id, telegram_chat_id, task_id)
+    print(result)
+`}
+</CodeBlock>
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+#### Особенности работы API:
+
+- Для того, чтобы эндпоинты начали отвечать, необходимо, чтобы был отправлен бот токен вашего ресурса в системе Traffy.
+
+- При запросе заданий Traffy - задания каждый раз выдаются разные. Они не кэшеруются сервисом. Вы можете настроить кэширование самостоятельно на стороне бота.
+
+- Если задание потеряло актуальность (например, данная таска отлита, или она на паузе, или удалена), но из-за кэша на стороне вашего бота юзер получил это задание, то юзер сможет его выполнить. При этом деньги за его переход не засчитаются.
+
+
+
+
+
+
+      

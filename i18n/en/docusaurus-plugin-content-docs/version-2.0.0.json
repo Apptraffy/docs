@@ -8,7 +8,11 @@
     "description": "The label for category Интеграция скрипта продавца in sidebar tutorialSidebar"
   },
   "sidebar.tutorialSidebar.category.Продажа трафика c Telegram Miniapp": {
-    "message": "Selling Traffic from Telegram Miniapp\n",
+    "message": "Selling Traffic from Telegram Miniapp",
+    "description": "The label for category Интеграция скрипта рекламодателя in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Продажа трафика с Telegram Bot": {
+    "message": "Selling Traffic from Telegram Bot",
     "description": "The label for category Интеграция скрипта рекламодателя in sidebar tutorialSidebar"
   }
 }

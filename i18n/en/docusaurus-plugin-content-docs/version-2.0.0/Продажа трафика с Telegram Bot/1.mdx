@@ -1,0 +1,209 @@
+---
+id: traffy-bot-api
+title: "Traffy Bot API"
+description: ""
+sidebar_label: How to Integrate Tasks?
+sidebar_position: 0
+hide_title: true
+custom_edit_url: null
+slug: /seller-bot/api/
+---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+```
+
+# Integration of Traffy Tasks into a Telegram Bot
+
+If you are the owner or developer of a bot and want to add Traffy tasks to your bot (for example, as a mandatory subscription), you can use the Traffy API.
+
+> Attention! This approach does not work for Telegram Miniapp.
+
+### The Traffy API consists of two endpoints:
+
+```mdx-code-block
+<Tabs>
+<TabItem value="JS">
+```
+
+```mdx-code-block
+<CodeBlock className="language-ts" title="Endpoint to retrieve tasks (TypeScript):">
+{`
+    import axios from 'axios';
+
+    export type GetTraffyTasksResponse =
+    {
+        "success": true,
+        "message": "string",
+        "tasks": {
+            "id": "string",
+            "title": "string",
+            "link": "string",
+            "image_url": "string"
+        }[]
+    }
+
+    export async function getTraffyTasks(
+        resourceId: string,
+        telegramChatId: string
+    ): Promise<GetTraffyTasksResponse> {
+
+        const url = new URL('https://api.traffy.site/v1/mixer/bot/pick_tasks');
+
+        url.searchParams.append('resource_id', resourceId);
+        url.searchParams.append('telegram_id', telegramChatId);
+        url.searchParams.append('max_tasks', 3);
+
+        const response = await axios.get(url.toString());
+        return response.data as GetTraffyTasksResponse;
+    }
+`}
+</CodeBlock>
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Python">
+```
+
+```mdx-code-block
+<CodeBlock className="language-python" title="Endpoint to retrieve tasks (Python):">
+{`
+import requests
+from typing import List, TypedDict
+
+class Task(TypedDict):
+    id: str
+    title: str
+    link: str
+    image_url: str
+
+class GetTraffyTasksResponse(TypedDict):
+    success: bool
+    message: str
+    tasks: List[Task]
+
+def get_traffy_tasks(resource_id: str, telegram_chat_id: str) -> GetTraffyTasksResponse:
+    url = "https://api.traffy.site/v1/mixer/bot/pick_tasks"
+    params = {
+        "resource_id": resource_id,
+        "telegram_id": telegram_chat_id,
+        "max_tasks": 3  # This value will be automatically converted to a string
+    }
+
+    response = requests.get(url, params=params)
+    response.raise_for_status()  # Raise an exception in case of an HTTP error
+    return response.json()  # It is assumed that the returned data conforms to GetTraffyTasksResponse
+
+# Example usage:
+if __name__ == "__main__":
+    resource_id = "your_resource_id"
+    telegram_chat_id = "your_telegram_chat_id"  # Pass the chat id as a string or number; it will be converted
+    result = get_traffy_tasks(resource_id, telegram_chat_id)
+    print(result)
+`}
+</CodeBlock>
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+```mdx-code-block
+<Tabs>
+<TabItem value="JS">
+```
+
+```mdx-code-block
+<CodeBlock className="language-ts" title="Endpoint to check if a user has subscribed to a specific channel/miniapp/bot (TypeScript):">
+{`
+    import axios from 'axios';
+
+    export type CheckTraffyTaskResponse =
+    {
+        "is_completed": false,
+        "token": null
+    } | {
+        "is_completed": true,
+        "token": string
+    }
+
+    export async function checkSubscriptionTraffy(
+        resourceId: string,
+        telegramChatId: string,
+        taskId: string
+    ): Promise<CheckTraffyTaskResponse> {
+
+        const url = new URL('https://api.traffy.site/v1/mixer/bot/check_completion');
+
+        url.searchParams.append('resource_id', resourceId);
+        url.searchParams.append('telegram_id', telegramChatId);
+        url.searchParams.append('task_id', taskId);
+
+        const response = await axios.get(url.toString());
+        return response.data as CheckTraffyTaskResponse;
+    }
+`}
+</CodeBlock>
+```
+
+```mdx-code-block
+</TabItem>
+<TabItem value="Python">
+```
+
+```mdx-code-block
+<CodeBlock className="language-python" title="Endpoint to check if a user has subscribed to a specific channel/miniapp/bot (Python):">
+{`
+import requests
+from typing import Union, TypedDict
+
+class CheckTraffyTaskNotCompleted(TypedDict):
+    is_completed: bool  # Will be False
+    token: None
+
+class CheckTraffyTaskCompleted(TypedDict):
+    is_completed: bool  # Will be True
+    token: str
+
+CheckTraffyTaskResponse = Union[CheckTraffyTaskNotCompleted, CheckTraffyTaskCompleted]
+
+def check_subscription_traffy(resource_id: str, telegram_chat_id: str, task_id: str) -> CheckTraffyTaskResponse:
+    url = "https://api.traffy.site/v1/mixer/bot/check_completion"
+    params = {
+        "resource_id": resource_id,
+        "telegram_id": telegram_chat_id,
+        "task_id": task_id,
+    }
+
+    response = requests.get(url, params=params)
+    response.raise_for_status()  # Raise an error if no successful response is received
+    return response.json()  # It is assumed that the returned data conforms to CheckTraffyTaskResponse
+
+# Example usage:
+if __name__ == "__main__":
+    resource_id = "your_resource_id"
+    telegram_chat_id = "your_telegram_chat_id"
+    task_id = "your_task_id"
+
+    result = check_subscription_traffy(resource_id, telegram_chat_id, task_id)
+    print(result)
+`}
+</CodeBlock>
+```
+
+```mdx-code-block
+</TabItem>
+</Tabs>
+```
+
+#### API Features:
+
+- For the endpoints to start responding, it is required that your resource's bot token is submitted in the Traffy system.
+
+- When requesting Traffy tasks, different tasks are provided every time. They are not cached by the service. You can implement caching on the bot side if needed.
+
+- If a task becomes outdated (for example, the task is no longer valid, is on pause, or has been removed), but due to caching on your bot the user receives this task, the user will be able to complete it. However, the click will not be counted towards earnings.
