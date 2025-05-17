@@ -11,9 +11,9 @@ Welcome to the Traffy documentation! Here you will learn how to sell and buy tra
 After topping up your balance and creating an advertising campaign, the steps you take depend on the type of resource on which you want to receive traffic.  
 To **implement the CPA model**, meaning to pay only for real visitors:
 
-### [**Telegram Miniapp:**](buyer/script-installation)
+### [**Telegram Miniapp:**](/docs/buyer/script-installation)
 
-- **Integration choice:** Send the Bot Token or [**install the script**](buyer/script-installation) that registers users.
+- **Integration choice:** Send the Bot Token or [**install the script**](/docs/buyer/script-installation) that registers users.
 - If you choose the script, you can upload your user database to avoid overlap.
 
 ### **Telegram Bot:**
@@ -28,9 +28,9 @@ To **implement the CPA model**, meaning to pay only for real visitors:
 
 When you create a resource in the seller section, you will receive a **Traffy Key** — a key for obtaining and verifying tasks, as well as for event registration. Further steps depend on the type of your resource.
 
-### [**Telegram Miniapp:**](seller/preparation)
+### [**Telegram Miniapp:**](/docs/seller/preparation)
 
-- Tasks are displayed through a [special script](seller/preparation) that requests and renders them.
+- Tasks are displayed through a [special script](/docs/seller/preparation) that requests and renders them.
 - Your responsibilities:
     1. Integrate the script into the `<head>` section of your application.
     2. Define a location for displaying tasks.
@@ -38,7 +38,7 @@ When you create a resource in the seller section, you will receive a **Traffy Ke
     4. Implement reward allocation for task completion.
     5. Verify functionality in production mode.
 
-### **Telegram Bot:**
+### [**Telegram Bot:**](/docs/seller-bot/api/)
 
 - After sending the Bot Token:
     1. Request tasks via our API.
