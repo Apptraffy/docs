@@ -72,8 +72,9 @@ import CodeBlock from '@theme/CodeBlock';
 ```mdx-code-block
 <CodeBlock className="language-python" title="Endpoint, который позволяет получить задания (python):">
 {`
-import requests
-from typing import List, TypedDict
+import aiohttp
+from typing import List
+from typing import TypedDict
 
 class Task(TypedDict):
     id: str
@@ -86,17 +87,20 @@ class GetTraffyTasksResponse(TypedDict):
     message: str
     tasks: List[Task]
 
-def get_traffy_tasks(resource_id: str, telegram_chat_id: str) -> GetTraffyTasksResponse:
+async def get_traffy_tasks(resource_id: str, telegram_chat_id: str) -> GetTraffyTasksResponse:
     url = "https://api.traffy.site/v1/mixer/bot/pick_tasks"
+
     params = {
         "resource_id": resource_id,
         "telegram_id": telegram_chat_id,
-        "max_tasks": 3  # Значение будет автоматически преобразовано в строку
+        "max_tasks": 3
     }
 
-    response = requests.get(url, params=params)
-    response.raise_for_status()  # выбрасываем исключение в случае HTTP ошибки
-    return response.json()  # предполагается, что возвращаемое значение соответствует GetTraffyTasksResponse
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, params=params) as response:
+            response.raise_for_status()
+            data = await response.json()
+            return data
 
 # Пример использования:
 if __name__ == "__main__":
@@ -159,30 +163,44 @@ if __name__ == "__main__":
 ```mdx-code-block
 <CodeBlock className="language-ts" title="Endpoint, который позволяет проверить, подписался ли пользователь на конкретный канал/миниап/бота (python):">
 {`
-import requests
-from typing import Union, TypedDict
+import aiohttp
+from typing import List
+from typing import TypedDict, Union
+
+class Task(TypedDict):
+    id: str
+    title: str
+    link: str
+    image_url: str
+
+class GetTraffyTasksResponse(TypedDict):
+    success: bool
+    message: str
+    tasks: List[Task]
 
 class CheckTraffyTaskNotCompleted(TypedDict):
-    is_completed: bool  # Будет False
+    is_completed: bool
     token: None
 
 class CheckTraffyTaskCompleted(TypedDict):
-    is_completed: bool  # Будет True
+    is_completed: bool
     token: str
 
 CheckTraffyTaskResponse = Union[CheckTraffyTaskNotCompleted, CheckTraffyTaskCompleted]
 
-def check_subscription_traffy(resource_id: str, telegram_chat_id: str, task_id: str) -> CheckTraffyTaskResponse:
+async def check_subscription_traffy(resource_id: str, telegram_chat_id: str, task_id: str) -> CheckTraffyTaskResponse:
     url = "https://api.traffy.site/v1/mixer/bot/check_completion"
+
     params = {
         "resource_id": resource_id,
         "telegram_id": telegram_chat_id,
         "task_id": task_id,
     }
 
-    response = requests.get(url, params=params)
-    response.raise_for_status()  # выброс ошибки при отсутствии успешного ответа
-    return response.json()  # предполагается, что возвращаемые данные соответствуют CheckTraffyTaskResponse
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, params=params) as response:
+            response.raise_for_status()
+            return await response.json()
 
 # Пример использования:
 if __name__ == "__main__":
